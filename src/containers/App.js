@@ -4,6 +4,11 @@ import Radium from 'radium'
 import Persons from  '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 class App  extends Component {
+
+  constructor(props){
+    super(props);
+    console.log('constructor')
+  }
   state = ({
     persons : [
       { id:"id1",name:"Yusuf", age:28},
@@ -12,6 +17,17 @@ class App  extends Component {
     ],
     showPersons:false
   })
+
+  static getDerivedStateFromProps(props, state){
+    console.log('getDerivedStateFromProps', props)
+    return state
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount')
+  }
+
+
   switchButtonHandler = (newName) => {
     this.setState({
       persons : [
@@ -53,7 +69,7 @@ class App  extends Component {
     this.setState({persons: persons})
   }
   render() {
-
+      console.log('render from App')
     let persons = null
     if (this.state.showPersons) {
         persons = ( 
@@ -63,7 +79,6 @@ class App  extends Component {
                       persons={this.state.persons}
                     />
                   )
-
     }
     
     return (
